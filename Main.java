@@ -82,8 +82,12 @@ public class Main {
                             ", State: " + bill.getState() +
                             ", Provider: " + bill.getProvider());
                         break;
+                    case "SCHEDULE":
+                        ScheduledPayment scheduled= service.schedulePayment(Integer.parseInt(parts[1]), LocalDate.parse(parts[2], formatter));
+                        System.out.println("Payment for bill id " + scheduled.getBillId() + "  is scheduled on " + scheduled.getScheduledDate().format(formatter));
+                        break;
                     default:
-                        throw new AssertionError();
+                    throw new AssertionError();
                 }
             }
         }

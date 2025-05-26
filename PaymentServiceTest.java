@@ -130,6 +130,15 @@ public class PaymentServiceTest {
             System.out.println("❌ Test failed for Search_provider: Expected " + bill_provider.getId() + ", " + bill_provider.getType() + ", " + bill_provider.getAmount() + ", " + bill_provider.getDueDate() + ", " + bill_provider.getState() + ", " + bill_provider.getProvider());
             allMatch = false;
             }
+        ScheduledPayment scheduledPaymentExpect = new ScheduledPayment(3, LocalDate.parse("30/10/2020", formatter));
+        ScheduledPayment scheduledPaymentActual=service.schedulePayment(3,LocalDate.parse("30/10/2020", formatter));
+        if(scheduledPaymentActual.getBillId()!=scheduledPaymentExpect.getBillId() ||
+           !scheduledPaymentActual.getScheduledDate().equals(scheduledPaymentExpect.getScheduledDate())){
+            System.out.println("❌ Test failed for schedulePayment: Expected " + scheduledPaymentExpect.getBillId() + ", " + scheduledPaymentExpect.getScheduledDate());
+            allMatch = false;
+        } else {
+            System.out.println("Test schedulePayment passed");
+        }
         if (allMatch) {
             System.out.println("✅ Test passed: All bills match expected.");
         }

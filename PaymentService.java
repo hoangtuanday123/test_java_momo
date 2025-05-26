@@ -11,10 +11,17 @@ public class PaymentService {
     private Customer customer ;
     static List<Payment> payments = new ArrayList<>();
     private static Integer paymentId = 0;
+    private List<ScheduledPayment> scheduledPayments = new ArrayList<>();
     public PaymentService(Customer customer,List<Bill> bills,List<Payment> payments) {
         this.payments.addAll(payments);
         this.bills.addAll(bills);
         this.customer = customer;
+    }
+    public ScheduledPayment schedulePayment(int billId, LocalDate date) {
+        ScheduledPayment scheduled=new ScheduledPayment(billId, date);
+        scheduledPayments.add(scheduled);
+        return scheduled;
+        
     }
 
     public Customer getCustomer() {
